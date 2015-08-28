@@ -6,7 +6,6 @@ use JobsCondDev\ModuloInventario\Models\StatusModel;
 use Illuminate\Http\Request;
 
 Route::controller('inventario', '\JobsCondDev\ModuloInventario\Http\Controllers\InventarioController');
-Route::controller('kit', '\JobsCondDev\ModuloInventario\Http\Controllers\kitController');
 Route::controller('relatorio', '\JobsCondDev\ModuloInventario\Http\Controllers\RelatorioController');
 
 
