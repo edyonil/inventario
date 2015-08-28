@@ -1,0 +1,28 @@
+<div class="mdl-cell mdl-cell--12-col" ng-init="RelatorioCtrl.init()">
+    <md-toolbar class="md-su">
+        <div class="md-toolbar-tools">
+            <h2 class="md-flex">Relatório</h2>
+            <a style="position:absolute; right: 10px;" href="#/inventario" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <i class="material-icons">arrow_back</i>
+            </a>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding style="height: 600px; position: relative">
+        <md-input-container>
+            <md-select style="margin-top: 0px; padding-top: 20px;" placeholder="Tipo de Equipamento" ng-model="RelatorioCtrl.query.tipoEquipamento" ng-change="RelatorioCtrl.onChange(true)">
+                <md-option ng-repeat="tipoEquipamento in RelatorioCtrl.tipoEquipamento" value="{{tipoEquipamento.id}}">{{tipoEquipamento.descricao}}</md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container>
+            <md-select style="margin-top: 0px; padding-top: 20px;" name="proprietario" placeholder="Proprietário" ng-model="RelatorioCtrl.query.proprietario" ng-change="RelatorioCtrl.onChange(true)" style="min-width: 400px">
+                <md-option ng-repeat="proprietario in RelatorioCtrl.proprietario" value="{{proprietario._id}}">{{proprietario.nome}}</md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container>
+            <md-select style="margin-top: 0px; padding-top: 20px;" name="status" placeholder="Status" ng-model="RelatorioCtrl.query.status" ng-change="RelatorioCtrl.onChange(true)" style="min-width: 400px">
+                <md-option ng-repeat="status in RelatorioCtrl.status" value="{{status._id}}">{{status.descricao}}</md-option>
+            </md-select>
+        </md-input-container>
+        <md-button ng-click="RelatorioCtrl.gerar()" class="md-raised md-primary">Gerar</md-button>
+    </md-content>
+</div>

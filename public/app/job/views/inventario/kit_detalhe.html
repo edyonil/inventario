@@ -1,0 +1,93 @@
+<md-dialog aria-label="Detalhamento do Kit">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Detalhes do Kit</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="hide()">
+                    <i class="material-icons">clear</i>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <md-data-table-container>
+                <table md-data-table style="min-width: 800px;">
+                    <thead>
+                        <tr>
+                            <th colspan="4">Itens do Kit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>
+                            <table class="minha-tabela">
+                                <tbody>
+                                <tr ng-if="$index == 0">
+                                    <td style="width: 20%">
+                                        Usuario:
+                                   </td>
+                                    <td style="width: 30%">
+                                        {{::item.usuario}}
+                                    </td>
+                                    <td style="width: 20%; text-align: right; font-weight: bold">
+                                        Setor:
+                                    </td>
+                                    <td style="width: 30%">
+                                        {{::item.setorSigla.sigla}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Tipo de equipamento:</td>
+                                    <td style="width: 20%">{{::item.tipoEquipamentoNome}}</td>
+                                    <td style="width: 20%; text-align: right; font-weight: bold">
+                                                <span ng-if="item.tipoEquipamento == 1">
+                                                    Sistema Operacional:
+                                                </span>
+                                    </td>
+                                    <td style="width: 30%">
+                                                <span ng-if="item.tipoEquipamento == 1">
+                                                    {{::item.sistemaOperacional}}
+                                                </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Nº de serie:</td>
+                                    <td style="width: 30%">{{::item.numeroSerie}}</td>
+                                    <td style="width: 20%; text-align: right; font-weight: bold">
+                                                <span ng-if="item.tipoEquipamento == 1">
+                                                    Nome do computador:
+                                                </span>
+                                    </td>
+                                    <td style="width: 30%">
+                                                <span ng-if="item.tipoEquipamento == 1">
+                                                    {{::item.nomeComputador}}
+                                                </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Proprietário:</td>
+                                    <td style="width: 30%">{{::item.proprietarioNome.nome}}</td>
+                                    <td style="width: 20%; text-align: right; font-weight: bold">
+                                                <span ng-if="item.patrimonio != null">
+                                                    Patrimônio:
+                                                </span>
+                                    </td>
+                                    <td style="width: 30%">
+                                                <span ng-if="item.patrimonio != null">
+                                                    {{::item.patrimonio}}
+                                                </span>
+                                    </td>
+                                </tr>
+                                <tr ng-if="$last">
+                                    <td colspan="4" style="text-align: right; font-style: oblique;">Cadastrado em: {{::item.createdAt}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-data-table-container>
+        </md-content>
+    </form>
+</md-dialog>

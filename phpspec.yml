@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: JobsCondDev
+        psr4_prefix: JobsCondDev
+        src_path: app

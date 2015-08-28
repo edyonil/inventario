@@ -1,0 +1,8 @@
+{
+  "name": "angular-piwik",
+  "version": "1.3.2",
+  "main": "./angular-piwik.js",
+  "dependencies": {
+    "angular": "~1.0.5"
+  }
+}

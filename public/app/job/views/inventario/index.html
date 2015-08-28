@@ -1,0 +1,131 @@
+<div class="mdl-cell mdl-cell--12-col" ng-init="InventarioCtrl.all()">
+    <md-toolbar class="md-su">
+        <div class="md-toolbar-tools">
+            <h2 class="md-flex">Lista de equipamentos</h2>
+            <a style="position:absolute; right: 10px; z-index:1000" href="#/inventario/form" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+    </md-toolbar>
+    <div layout="column">
+        <md-content md-theme="docs-dark" layout="row" layout-sm="column">
+            <md-input-container>
+                <md-select style="margin-top: 0px; padding-top: 20px;" placeholder="Tipo de Equipamento" ng-model="InventarioCtrl.query.tipoEquipamento" ng-change="InventarioCtrl.onChange(true)">
+                    <md-option ng-repeat="tipoEquipamento in InventarioCtrl.tipoEquipamento" value="{{tipoEquipamento.id}}">{{tipoEquipamento.descricao}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <md-select style="margin-top: 0px; padding-top: 20px;" name="proprietario" placeholder="Proprietário" ng-model="InventarioCtrl.query.proprietario" ng-change="InventarioCtrl.onChange(true)" style="min-width: 400px">
+                    <md-option ng-repeat="proprietario in InventarioCtrl.proprietario" value="{{proprietario._id}}">{{proprietario.nome}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <md-select style="margin-top: 0px; padding-top: 20px;" name="status" placeholder="Status" ng-model="InventarioCtrl.query.status" ng-change="InventarioCtrl.onChange(true)" style="min-width: 400px">
+                    <md-option ng-repeat="status in InventarioCtrl.status" value="{{status._id}}">{{status.descricao}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Nº de série</label>
+                <input ng-model="InventarioCtrl.query.numeroSerie" ng-change="InventarioCtrl.onChange(true)" type="text">
+            </md-input-container>
+            <md-input-container>
+                <label>Patrimônio</label>
+                <input ng-model="InventarioCtrl.query.patrimonio" type="text" ng-change="InventarioCtrl.onChange(true)">
+            </md-input-container>
+            <md-input-container>
+                <label>Nome do computador</label>
+                <input ng-model="InventarioCtrl.query.nomeComputador" type="text" ng-change="InventarioCtrl.onChange(true)">
+            </md-input-container>
+        </md-content>
+    </div>
+    <p style="padding: 3px; background-color: #FF4081; color: #FFF" ng-show="InventarioCtrl.itens.length == 0">Nenhum registro foi encontrato com esses parametros</p>
+    <md-content ng-if="InventarioCtrl.itens.length > 0">
+            <md-data-table-container>
+                <table md-data-table md-progress="deferred">
+                    <thead>
+                        <tr>
+                            <th colspan="5">
+                                Lista dos equipamentos cadastrados:  <span class="mdl-badge" data-badge="{{InventarioCtrl.total}}">Total de registro</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody md-auto-select>
+                        <tr ng-repeat="item in InventarioCtrl.itens">
+                            <td>
+                                <table class="minha-tabela">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 20%">Tipo de equipamento:</td>
+                                            <td style="width: 20%">{{::item.tipoEquipamentoNome}}</td>
+                                            <td style="width: 20%; text-align: right; font-weight: bold">
+                                                <span ng-if="item.tipoEquipamento == 1 || item.tipoEquipamento == 8">
+                                                    Sistema Operacional:
+                                                </span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span ng-if="item.tipoEquipamento == 1 || item.tipoEquipamento == 8">
+                                                    {{::item.sistemaOperacional}}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div style="float: right" ng-show="item.status" class="label {{item.statusNome.alias}}">{{item.statusNome.descricao}}</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%">Nº de serie:</td>
+                                            <td style="width: 20%">{{::item.numeroSerie}}</td>
+                                            <td style="width: 20%; text-align: right; font-weight: bold">
+                                                <span ng-if="item.tipoEquipamento == 1 || item.tipoEquipamento == 8">
+                                                    Nome do computador:
+                                                </span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span ng-if="item.tipoEquipamento == 1 || item.tipoEquipamento == 8">
+                                                    {{::item.nomeComputador}}
+                                                </span>
+                                            </td>
+                                            <td style="width: 20%; text-align: right">
+                                                <a class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-button--fab mdl-button--mini-fab" href="#/inventario/form/{{item.id}}" flex flex-md="100">
+                                                    <i class="material-icons">mode_edit</i>
+                                                </a>
+                                                <span ng-if="item.kit != null">
+                                                    <md-button id="tt1" class="md-raised md-fab md-mini" ng-click="InventarioCtrl.kitDetalhe($event, item.dadoskit)" flex flex-md="100">
+                                                        kit
+                                                    </md-button>
+                                                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored--primary mdl-button--fab mdl-button--mini-fab" href="#/inventario/kit/{{item.kit}}" flex flex-md="100">
+                                                        <i class="material-icons">remove_red_eye</i>
+                                                    </a>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%">Proprietário:</td>
+                                            <td style="width: 20%">{{::item.proprietarioNome.nome}}</td>
+                                            <td style="width: 20%; text-align: right; font-weight: bold">
+                                                <span ng-if="item.patrimonio != null">
+                                                    Patrimônio:
+                                                </span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span ng-if="item.patrimonio != null">
+                                                    {{::item.patrimonio}}
+                                                </span>
+                                            </td>
+                                            <td style="width: 20%; text-align: right">
+                                                <i>cadastrado em: {{::item.createdAt}}</i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-data-table-container>
+
+            <md-data-table-toolbar layout-align="end">
+                <md-data-table-pagination md-limit="InventarioCtrl.query.limit" md-page="InventarioCtrl.query.page" md-total="{{InventarioCtrl.total}}" md-trigger="InventarioCtrl.onChange"></md-data-table-pagination>
+            </md-data-table-toolbar>
+
+        </md-content>
+</div>

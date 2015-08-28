@@ -1,0 +1,33 @@
+{
+  "name": "JobsCondDev",
+  "version": "0.0.1",
+  "description": "Open Project for Conder",
+  "keywords": [
+    "project",
+    "open",
+    "dev"
+  ],
+  "authors": [
+    "edy.borges"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "~0.10.0",
+    "material-design-lite": "~1.0.0",
+    "angular-route": "~1.4.2",
+    "jquery": "~2.1.4",
+    "angular-material-data-table": "*",
+    "angular-messages": "~1.4.2",
+    "angular-resource": "~1.4.2",
+    "angular-cookies": "~1.4.3",
+    "angular-piwik": "~1.3.2",
+    "angulartics": "~0.20.0"
+  }
+}

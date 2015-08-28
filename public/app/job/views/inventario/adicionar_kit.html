@@ -1,0 +1,106 @@
+<md-bottom-sheet style="width: 90%;padding: 0px; margin: 0 auto; top: -30px">
+    <div class="mdl-cell mdl-cell--12-col" ng-controller="LocalizarItemController as LocalizarCtrl">
+        <md-toolbar class="md-su">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">Adicionar item ao kit</h2>
+                <a style="position:absolute; right: 10px;" ng-click="LocalizarCtrl.fecharItem()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                    <i class="material-icons">arrow_back</i>
+                </a>
+            </div>
+        </md-toolbar>
+        <md-content layout-padding style="height: 600px; position: relative">
+            <div class="progresso" layout="row" layout-sm="column" layout-align="space-around" ng-show="LocalizarCtrl.progresso">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <form name="transferirForm" ng-submit="LocalizarCtrl.transferir()">
+                <div layout="row" layout-wrap>
+                    <div flex="33">
+                        <md-input-container>
+                            <label>Número de série do equipamento</label>
+                            <input required name="numeroSerie" ng-model="LocalizarCtrl.numeroSerie">
+                            <div ng-if="transferirForm.numeroSerie.$touched" ng-messages="transferirForm.nomeComputador.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div flex="33">
+                        <a style="margin-top: 10px;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" ng-click="LocalizarCtrl.buscar()"> Localizar item </a>
+                    </div>
+                </div>
+                <p style="padding: 3px; background-color: #FF4081; color: #FFF" ng-show="LocalizarCtrl.nenhumRegistro">Nenhum equipamento foi encontrato com esses parametros</p>
+                <md-content style="padding: 24px;" ng-if="LocalizarCtrl.itens.length > 0">
+                    <md-data-table-container>
+                        <table md-data-table md-progress="deferred">
+                            <thead>
+                            <tr>
+                                <th colspan="6">
+                                    Lista dos equipamentos cadastrados
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody md-auto-select>
+                            <tr ng-repeat="item in LocalizarCtrl.itens">
+                                <td style="width: 10%">
+                                    <md-radio-group ng-model="LocalizarCtrl.form.id" ng-show="item.tipoEquipamento != 5 && item.tipoEquipamento != 8 && LocalizarCtrl.id != item.kit">
+                                        <md-radio-button required value="{{item.id}}" class="md-primary"></md-radio-button>
+                                    </md-radio-group>
+                                </td>
+                                <td>
+                                    <table class="minha-tabela">
+                                        <tbody>
+                                        <tr>
+                                            <td style="width: 20%">Tipo de equipamento:</td>
+                                            <td style="width: 20%">{{::item.tipoEquipamentoNome}}</td>
+                                            <td style="width: 20%; text-align: right; font-weight: bold">
+                                                    <span ng-if="item.tipoEquipamento == 1 || item.tipoEquipamento == 8">
+                                                        Sistema Operacional:
+                                                    </span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                    <span ng-if="item.tipoEquipamento == 1 || item.tipoEquipamento == 8">
+                                                        {{::item.sistemaOperacional}}
+                                                    </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%">Nº de serie:</td>
+                                            <td style="width: 20%">{{::item.numeroSerie}}</td>
+                                            <td style="width: 20%; text-align: right; font-weight: bold">
+                                                    <span ng-if="item.tipoEquipamento == 1 || item.tipoEquipamento == 8">
+                                                        Nome do computador:
+                                                    </span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                    <span ng-if="item.tipoEquipamento == 1 || item.tipoEquipamento == 8">
+                                                        {{::item.nomeComputador}}
+                                                    </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%">Proprietário:</td>
+                                            <td style="width: 20%">{{::item.proprietarioNome.nome}}</td>
+                                            <td style="width: 20%; text-align: right; font-weight: bold">
+                                                    <span ng-if="item.patrimonio != null">
+                                                        Patrimônio:
+                                                    </span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                    <span ng-if="item.patrimonio != null">
+                                                        {{::item.patrimonio}}
+                                                    </span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-data-table-container>
+                </md-content>
+                <md-button class="md-raised md-primary" ng-disabled="LocalizarCtrl.form.id == null">Transferir</md-button>
+                <a ng-click="LocalizarCtrl.fecharItem()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancelar</a>
+            </form>
+        </md-content>
+    </div>
+</md-bottom-sheet>

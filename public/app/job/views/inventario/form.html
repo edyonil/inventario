@@ -1,0 +1,191 @@
+<div class="mdl-cell mdl-cell--12-col" ng-init="InventarioCtrl.init()">
+    <md-toolbar class="md-su">
+        <div class="md-toolbar-tools">
+            <h2 class="md-flex">Cadastro do Equipamento</h2>
+            <a style="position:absolute; right: 10px;" href="#/inventario" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <i class="material-icons">arrow_back</i>
+            </a>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding style="height: 600px; position: relative">
+        <div class="progresso" layout="row" layout-sm="column" layout-align="space-around" ng-show="InventarioCtrl.progresso">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <form name="inventarioForm" ng-submit="InventarioCtrl.salvar()">
+            <md-content style="padding: 24px;">
+                <md-content>
+                    <md-select required name="tipoEquipamento" placeholder="Tipo de Equipamento" ng-model="InventarioCtrl.form.tipoEquipamento" style="min-width: 400px">
+                        <md-option ng-repeat="tipoEquipamento in InventarioCtrl.tipoEquipamento" value="{{tipoEquipamento.id}}">{{tipoEquipamento.descricao}}</md-option>
+                    </md-select>
+                    <div ng-if="inventarioForm.tipoEquipamento.$touched" ng-messages="inventarioForm.tipoEquipamento.$error">
+                        <div ng-message="required">Campo Obrigatório.</div>
+                    </div>
+                </md-content>
+
+                <md-input-container>
+                    <md-select required name="status" placeholder="Status" ng-model="InventarioCtrl.form.status" style="min-width: 400px">
+                        <md-option ng-repeat="status in InventarioCtrl.status" value="{{status._id}}">{{status.descricao}}</md-option>
+                    </md-select>
+                    <div ng-if="inventarioForm.status.$touched" ng-messages="inventarioForm.status.$error">
+                        <div ng-message="required">Campo Obrigatório.</div>
+                    </div>
+                </md-input-container>
+                <div ng-if="InventarioCtrl.form.tipoEquipamento == 7 || (InventarioCtrl.form.tipoEquipamento == 8 && InventarioCtrl.form.status == '55ad767ebffebcc3078b4568')">
+                    <h4 class="md-title" ng-show="InventarioCtrl.form.tipoEquipamento == 7"> Gabinete </h4>
+                    <md-input-container>
+                        <label>Usuário</label>
+                        <input required name="usuario" ng-model="InventarioCtrl.form.usuario">
+                        <div ng-if="inventarioForm.usuario.$touched" ng-messages="inventarioForm.usuario.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <md-select placeholder="Setor" required name="setor" ng-model="InventarioCtrl.form.setor" style="min-width: 400px">
+                            <md-option ng-repeat="setor in InventarioCtrl.setor" value="{{setor._id}}">{{setor.sigla}}</md-option>
+                        </md-select>
+                        <div ng-if="inventarioForm.setor.$touched" ng-messages="inventarioForm.setor.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div ng-if="InventarioCtrl.form.tipoEquipamento == 1 || InventarioCtrl.form.tipoEquipamento == 7 || InventarioCtrl.form.tipoEquipamento == 8">
+                    <md-input-container>
+                        <md-select required name="sistemaOperacional" placeholder="Sistema Operacional" ng-model="InventarioCtrl.form.sistemaOperacional" style="min-width: 400px">
+                            <md-option ng-repeat="sistemaOperacional in InventarioCtrl.sistemaOperacional" value="{{sistemaOperacional}}">{{sistemaOperacional}}</md-option>
+                        </md-select>
+                        <div ng-if="inventarioForm.sistemaOperacional.$touched" ng-messages="inventarioForm.sistemaOperacional.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Nome do computador</label>
+                        <input required name="nomeComputador" ng-model="InventarioCtrl.form.nomeComputador">
+                        <div ng-if="inventarioForm.nomeComputador.$touched" ng-messages="inventarioForm.nomeComputador.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <md-input-container>
+                    <label>Número de série</label>
+                    <input required name="numeroSerie" ng-model="InventarioCtrl.form.numeroSerie">
+                    <div ng-if="inventarioForm.numeroSerie.$touched" ng-messages="inventarioForm.numeroSerie.$error">
+                        <div ng-message="required">Campo Obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+                <div ng-if="InventarioCtrl.form.tipoEquipamento != 3 && InventarioCtrl.form.tipoEquipamento != 4 && InventarioCtrl.form.tipoEquipamento != 6">
+                    <md-input-container>
+                        <label>Patrimônio</label>
+                        <input ng-required="InventarioCtrl.form.proprietario == '559eec76bffebcfb168b456a' || InventarioCtrl.form.proprietario == '559eec76bffebcfb168b456b' || InventarioCtrl.form.proprietario == '559eec76bffebcfb168b456c' || InventarioCtrl.form.proprietario == '559eec76bffebcfb168b456d'" name="patrimonio" ng-model="InventarioCtrl.form.patrimonio">
+                        <div ng-if="inventarioForm.patrimonio.$touched" ng-messages="inventarioForm.patrimonio.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <md-input-container>
+                    <md-select required name="proprietario" placeholder="Proprietário" ng-model="InventarioCtrl.form.proprietario" style="min-width: 400px">
+                        <md-option ng-repeat="proprietario in InventarioCtrl.proprietario" value="{{proprietario._id}}">{{proprietario.nome}}</md-option>
+                    </md-select>
+                    <div ng-if="inventarioForm.proprietario.$touched" ng-messages="inventarioForm.proprietario.$error">
+                        <div ng-message="required">Campo Obrigatório.</div>
+                    </div>
+                </md-input-container>
+            </md-content>
+
+            <div ng-if="InventarioCtrl.form.tipoEquipamento == 7">
+                <md-divider></md-divider>
+                <h4 class="md-title"> Monitor </h4>
+                <md-content style="padding: 24px;">
+                    <md-input-container>
+                        <label>Patrimônio</label>
+                        <input name="patrimonioMonitor" ng-required="InventarioCtrl.form.proprietarioMonitor == '559eec76bffebcfb168b456a' || InventarioCtrl.form.proprietarioMonitor == '559eec76bffebcfb168b456b' || InventarioCtrl.form.proprietarioMonitor == '559eec76bffebcfb168b456c' || InventarioCtrl.form.proprietarioMonitor == '559eec76bffebcfb168b456d'" name="patrimonioMonitor" ng-model="InventarioCtrl.form.patrimonioMonitor">
+                        <div ng-if="inventarioForm.patrimonioMonitor.$touched" ng-messages="inventarioForm.patrimonioMonitor.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Número de série</label>
+                        <input required name="numeroSerieMonitor" ng-model="InventarioCtrl.form.numeroSerieMonitor">
+                        <div ng-if="inventarioForm.numeroSerie.$touched" ng-messages="inventarioForm.numeroSerieMonitor.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <md-select required name="proprietarioMonitor" placeholder="Proprietário" ng-model="InventarioCtrl.form.proprietarioMonitor" style="min-width: 400px">
+                            <md-option ng-repeat="proprietario in InventarioCtrl.proprietario" value="{{proprietario._id}}">{{proprietario.nome}}</md-option>
+                        </md-select>
+                        <div ng-if="inventarioForm.proprietarioMonitor.$touched" ng-messages="inventarioForm.proprietarioMonitor.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+                </md-content>
+
+                <md-divider></md-divider>
+                <h4 class="md-title"> Teclado </h4>
+                <md-content style="padding: 24px;">
+                    <md-input-container>
+                        <label>Número de série</label>
+                        <input required name="numeroSerieTeclado" ng-model="InventarioCtrl.form.numeroSerieTeclado">
+                        <div ng-if="inventarioForm.numeroSerieTeclado.$touched" ng-messages="inventarioForm.numeroSerieTeclado.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <md-select required name="proprietarioTeclado" placeholder="Proprietário" ng-model="InventarioCtrl.form.proprietarioTeclado" style="min-width: 400px">
+                            <md-option ng-repeat="proprietario in InventarioCtrl.proprietario" value="{{proprietario._id}}">{{proprietario.nome}}</md-option>
+                        </md-select>
+                        <div ng-if="inventarioForm.proprietarioTeclado.$touched" ng-messages="inventarioForm.proprietarioTeclado.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+                </md-content>
+
+                <md-divider></md-divider>
+                <h4 class="md-title">Mouse</h4>
+                <md-content style="padding: 24px;">
+                    <md-input-container>
+                        <label>Número de série</label>
+                        <input required name="numeroSerieMouse" ng-model="InventarioCtrl.form.numeroSerieMouse">
+                        <div ng-if="inventarioForm.numeroSerieMouse.$touched" ng-messages="inventarioForm.numeroSerieMouse.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-select required name="proprietarioMouse" placeholder="Proprietário" ng-model="InventarioCtrl.form.proprietarioMouse" style="min-width: 400px">
+                        <md-option ng-repeat="proprietario in InventarioCtrl.proprietario" value="{{proprietario._id}}">{{proprietario.nome}}</md-option>
+                    </md-select>
+                    <div ng-if="inventarioForm.proprietarioMouse.$touched" ng-messages="inventarioForm.proprietarioMouse.$error">
+                        <div ng-message="required">Campo Obrigatório.</div>
+                    </div>
+                </md-content>
+
+                <md-divider></md-divider>
+                <h4 class="md-title">Estabilizador</h4>
+                <md-content style="padding: 24px;">
+                    <md-input-container>
+                        <label>Número de série</label>
+                        <input required name="numeroSerieEstabilizador" ng-model="InventarioCtrl.form.numeroSerieEstabilizador">
+                        <div ng-if="inventarioForm.numeroSerieEstabilizador.$touched" ng-messages="inventarioForm.numeroSerieEstabilizador.$error">
+                            <div ng-message="required">Campo Obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-select required name="proprietarioEstabilizador" placeholder="Proprietário" ng-model="InventarioCtrl.form.proprietarioEstabilizador" style="min-width: 400px">
+                        <md-option ng-repeat="proprietario in InventarioCtrl.proprietario" value="{{proprietario._id}}">{{proprietario.nome}}</md-option>
+                    </md-select>
+                    <div ng-if="inventarioForm.proprietarioEstabilizador.$touched" ng-messages="inventarioForm.proprietarioEstabilizador.$error">
+                        <div ng-message="required">Campo Obrigatório.</div>
+                    </div>
+                </md-content>
+            </div>
+            <md-button class="md-raised md-primary" ng-disabled="inventarioForm.$invalid">Salvar</md-button>
+            <a href="#/inventario" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancelar</a>
+        </form>
+    </md-content>
+</div>

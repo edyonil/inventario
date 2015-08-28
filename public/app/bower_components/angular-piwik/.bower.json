@@ -1,0 +1,19 @@
+{
+  "name": "angular-piwik",
+  "version": "1.3.2",
+  "main": "./angular-piwik.js",
+  "dependencies": {
+    "angular": "~1.0.5"
+  },
+  "homepage": "https://github.com/mike-spainhower/bower-angular-piwik",
+  "_release": "1.3.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.3.2",
+    "commit": "d19f00debbabcad5067bc63238aa24cc5d756ef5"
+  },
+  "_source": "git://github.com/mike-spainhower/bower-angular-piwik.git",
+  "_target": "~1.3.2",
+  "_originalSource": "angular-piwik",
+  "_direct": true
+}
