@@ -10,21 +10,34 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::get('/', function () {
+
+    \JobsCondDev\User::create([
+        'name' => 'Admin',
+        'email' => 'admin@conder.ba.gov.br',
+        'password' => bcrypt('admin@conder')
+    ]);
+
     return view('index');
 });
 
-Route::get('cadastro-inventario', function(){
-    return "ola Mundo";
-});
+/*Route::group(['middleware' => 'auth'], function(){
+    Route::get('/', function () {
 
+        return view('index');
+    });
+});*/
 
-/*Route::get('limpar-base', function(){
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+Route::get('limpar-base', function(){
 
     \JobsCondDev\ModuloInventario\Models\KitModel::where('id', '!=', 1)->delete();
     \JobsCondDev\ModuloInventario\Models\InventarioModel::where('id', '!=', 1)->delete();
 
     return "Apagou!!!";
 
-});*/
+});

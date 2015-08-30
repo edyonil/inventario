@@ -103,7 +103,8 @@
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
             <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Home</a>
             <a class="mdl-navigation__link" href="#/inventario"><i class="mdl-color-text--blue-grey-400 material-icons">assignment</i>Inventário</a>
-            <a class="mdl-navigation__link" href="#/relatorio"><i class="mdl-color-text--blue-grey-400 material-icons">assignment</i>Relatório</a>
+            <a class="mdl-navigation__link" href="#/relatorio"><i class="mdl-color-text--blue-grey-400 material-icons">assessment</i>Relatório</a>
+            <a class="mdl-navigation__link" href="#/relatorio"><i class="mdl-color-text--blue-grey-400 material-icons">power_settings_new</i>Sair</a>
             <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">help_outline</i></a>
         </nav>
