@@ -67,8 +67,8 @@ return [
             'driver'   => 'mongodb',
             'host'     => 'localhost',
             'port'     => 27017,
-            'username' => '',
-            'password' => '',
+            'username' => 'admin',
+            'password' => 'Agencia7Bahia',
             'database' => 'jobsCondDev'
         ),
 
