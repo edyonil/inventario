@@ -9,6 +9,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::controller('inventario', '\JobsCondDev\ModuloInventario\Http\Controllers\InventarioController');
     Route::controller('relatorio', '\JobsCondDev\ModuloInventario\Http\Controllers\RelatorioController');
+    Route::controller('kit', '\JobsCondDev\ModuloInventario\Http\Controllers\KitController');
 
     Route::get('relatorio-enviar', function(Request $request){
 
